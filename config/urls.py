@@ -12,5 +12,5 @@ urlpatterns = [
     path('api/v1/categories/',include('apps.categories.urls')),
 ]
 urlpatterns+=drf_yasg_urlpatterns
-
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
