@@ -1,4 +1,4 @@
-from drf_spectacular.utils import extend_schema
+
 from rest_framework.generics import CreateAPIView
 from .models import Sale
 from .serializers import SaleCreateSerializer,SaleSerializer
