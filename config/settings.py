@@ -31,10 +31,14 @@ INSTALLED_APPS = [
     'apps.products',
     'apps.users',
     'apps.categories',
+    'apps.stores',
+    'apps.cashboxes',
+    'apps.sales',
 
 #     libs
     'rest_framework',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,3 +127,4 @@ MEDIA_URL = '/media/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'users.User'
