@@ -23,7 +23,7 @@ class Product(models.Model):
     description = models.TextField()
     measure = models.CharField(choices=MEASURE_TYPES,max_length=15)
     price = models.PositiveIntegerField()
-    image = models.ImageField(upload_to=_generate_filename)
+    image = models.ImageField(upload_to=_generate_filename,null=True,blank=True)
     barcode = models.CharField(max_length=31)
     barcode_type = models.CharField(max_length=31)
 

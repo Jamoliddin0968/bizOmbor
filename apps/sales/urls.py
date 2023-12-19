@@ -1,6 +1,8 @@
 from django.urls import  path,include
-from .views import SaleCreateAPIView
-
+from .views import SaleViewSet
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register('',SaleViewSet)
 urlpatterns = [
-    path('', SaleCreateAPIView.as_view(), name='sale-create'),
+    path('',include(router.urls)),
 ]
