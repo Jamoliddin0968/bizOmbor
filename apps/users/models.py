@@ -31,8 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
         validators=[username_validator],
     )
-    firstname = models.CharField(max_length=50,null=True,blank=True)
-    lastname = models.CharField(max_length=50,null=True,blank=True)
+    first_name = models.CharField(max_length=50,null=True,blank=True)
+    last_name = models.CharField(max_length=50,null=True,blank=True)
     phone = models.CharField(max_length=15)
 
     is_active = models.BooleanField(default=True)
