@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, CharField
 from .models import User
 
 
-class UserSerializer(ModelSerializer):
+class WorkerSerializer(ModelSerializer):
     password = CharField(write_only=True, required=True,
                          style={'input_type': 'password'})
 
