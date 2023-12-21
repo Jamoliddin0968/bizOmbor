@@ -1,6 +1,6 @@
-from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
 from .models import Sale
 from .serializers import SaleCreateSerializer, SaleSerializer
@@ -11,9 +11,10 @@ class SaleViewSet(viewsets.ModelViewSet):
     serializer_class = SaleSerializer
     http_method_names = ['post', 'get']
 
-    @swagger_auto_schema(
+    @extend_schema(
         tags=['Sale'],
-        request_body=SaleCreateSerializer,
+        request=SaleCreateSerializer,
+        responses={status.HTTP_201_CREATED: SaleSerializer}
     )
     def create(self, request, *args, **kwargs):
         serializer = SaleCreateSerializer(data=request.data)
@@ -22,14 +23,10 @@ class SaleViewSet(viewsets.ModelViewSet):
         serializer = SaleSerializer(sale_object)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    @swagger_auto_schema(
-        tags=['Sale'],
-    )
+    @extend_schema(tags=['Sale'])
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(
-        tags=['Sale'],
-    )
+    @extend_schema(tags=['Sale'])
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)

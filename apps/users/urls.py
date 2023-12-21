@@ -6,8 +6,8 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register("workers/", WorkerViewSet)
-router.register('managers/',ManagerViewSet)
+router.register("workers", WorkerViewSet)
+router.register('managers',ManagerViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
