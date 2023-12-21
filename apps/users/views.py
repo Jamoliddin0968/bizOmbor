@@ -1,7 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from .permissions import IsSuperUser,IsManager
 from .models import Manager,Worker
 from .serializers import ManagerSerializer,WorkerSerializer
@@ -32,7 +31,7 @@ class WorkerViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)
 
-    @swagger_auto_schema(tags=['Manager'], operation_id='destroy_user')
+    @swagger_auto_schema(tags=['User'], operation_id='destroy_user')
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
