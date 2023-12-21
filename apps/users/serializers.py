@@ -22,7 +22,7 @@ class WorkerSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ("id", 'first_name', 'last_name', 'username',
-                  "phone", "is_active", "password")
+                  "phone", "is_active", "password",'store')
 
 
 

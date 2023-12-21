@@ -18,6 +18,8 @@ class WorkerViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
+    def perform_create(self, serializer):
+
     @extend_schema(tags=['User'], description='Create a user')
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
