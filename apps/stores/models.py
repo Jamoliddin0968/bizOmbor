@@ -9,4 +9,5 @@ class Store(models.Model):
 
 class StoreUser(models.Model):
     user=models.OneToOneField('users.User',on_delete=models.CASCADE)
+    store = models.ForeignKey('stores.Store',on_delete=models.CASCADE)
 
