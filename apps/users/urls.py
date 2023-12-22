@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register("workers", WorkerViewSet)
+# router.register("workers", WorkerViewSet)
 router.register('managers',ManagerViewSet)
 
 urlpatterns = [
