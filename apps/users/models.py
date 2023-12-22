@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50,null=True,blank=True)
     last_name = models.CharField(max_length=50,null=True,blank=True)
     phone = models.CharField(max_length=15)
-    store = models.ForeignKey('stores.Store',on_delete=models.SET_NULL,null=True,blank=True)
+    # store = models.ForeignKey('stores.Store',on_delete=models.SET_NULL,null=True,blank=True,related_name='store_workers')
     is_manager = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

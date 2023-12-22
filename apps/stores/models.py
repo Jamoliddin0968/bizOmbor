@@ -5,4 +5,8 @@ class Store(models.Model):
     address = models.CharField(max_length=255)
 
 
-    user = models.ForeignKey('users.Manager',on_delete=models.CASCADE,limit_choices_to={'is_manager': True})
+    manager = models.ForeignKey('users.Manager',on_delete=models.CASCADE,limit_choices_to={'is_manager': True})
+
+class StoreUser(models.Model):
+    user=models.ForeignKey('users.User',on_delete=models.CASCADE)
+

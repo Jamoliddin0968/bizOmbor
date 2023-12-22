@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.users.permissions import IsManager
 from .models import Store
 from .serializers import StoreSerializer
-
+from rest_framework.decorators import action
 
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
@@ -13,3 +13,11 @@ class StoreViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+
+    @action(
+        methods=["post"], detail=True
+    )
+    def add_user_by_user_id(self, request, *args, **kwargs):
+        pass
