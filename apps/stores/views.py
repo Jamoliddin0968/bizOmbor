@@ -12,12 +12,6 @@ class StoreViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsManager]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(manager=self.request.user)
 
-
-
-    @action(
-        methods=["post"], detail=True
-    )
-    def add_user_by_user_id(self, request, *args, **kwargs):
-        pass
+    @action(methods=['post',])

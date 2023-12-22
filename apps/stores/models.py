@@ -8,5 +8,5 @@ class Store(models.Model):
     manager = models.ForeignKey('users.Manager',on_delete=models.CASCADE,limit_choices_to={'is_manager': True})
 
 class StoreUser(models.Model):
-    user=models.ForeignKey('users.User',on_delete=models.CASCADE)
+    user=models.OneToOneField('users.User',on_delete=models.CASCADE)
 
