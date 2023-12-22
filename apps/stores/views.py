@@ -1,12 +1,10 @@
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from apps.users.permissions import IsManager
 from .models import Store,StoreUser
 from .serializers import StoreSerializer, StoreUserCreateSerializer
-from rest_framework.decorators import action
-from rest_framework.mixins import CreateModelMixin
+
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
@@ -35,8 +33,6 @@ class StoreViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(manager=self.request.user)
 
-
-
 class StoreUserViewSet(viewsets.ModelViewSet):
     serializer_class = StoreUserCreateSerializer
     queryset = StoreUser.objects.all()
@@ -48,6 +44,8 @@ class StoreUserViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+
     @extend_schema(tags=['Store'],)
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
