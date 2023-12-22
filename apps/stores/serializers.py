@@ -21,6 +21,6 @@ class StoreUserCreateSerializer(ModelSerializer):
         store = validated_data.get('store')
         user = WorkerSerializer(data=user)
         user.is_valid(raise_exception=True)
-        user.save()
+        user=user.save()
         store_user,_ = StoreUser.objects.get_or_create(user=user,store=store)
         return store_user
