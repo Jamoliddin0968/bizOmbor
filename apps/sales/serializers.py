@@ -16,9 +16,6 @@ class SaleSerializer(serializers.ModelSerializer):
         model = Sale
 
 
-# create qismi uchun
-
-
 class SaleItemCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SaleItem
@@ -27,7 +24,6 @@ class SaleItemCreateSerializer(serializers.ModelSerializer):
 
 
 class SaleCreateSerializer(serializers.Serializer):
-
     items = SaleItemCreateSerializer(many=True)
     discount = serializers.IntegerField(min_value=0)
     cash = serializers.IntegerField(min_value=0)
