@@ -74,15 +74,15 @@ class TestApiView(RetrieveUpdateAPIView):
     def get_object(self):
         return self.request.user
 
-    @extend_schema(tags=['For all users'], description='Retrieve')
+    @extend_schema(tags=['Users'], description='Retrieve')
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
 
-    @extend_schema(tags=['For all users'], description='Update a manager')
+    @extend_schema(tags=['Users',], description='Update a manager')
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
 
-    @extend_schema(tags=['For all users'], description='Partial update a manager')
+    @extend_schema(tags=['Users',], description='Partial update a manager')
     def partial_update(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)
