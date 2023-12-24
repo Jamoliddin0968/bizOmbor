@@ -1,9 +1,6 @@
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-)
-
+from .views import LoginManager,LoginWorker
 from django.urls import path
 urlpatterns = [
-    path('manager/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('user/', TokenObtainPairView.as_view(), name='token_refresh'),
+    path('manager/', LoginManager.as_view(), name='login+for_manager'),
+    path('worker/',LoginWorker.as_view(),name="login_for_worker")
 ]

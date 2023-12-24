@@ -51,3 +51,8 @@ class ManagerSerializer(ModelSerializer):
                   "phone", "is_active", "password")
 
 
+
+class TestSerializer(ModelSerializer):
+    class Meta:
+        model=User
+        fields = "__all__"

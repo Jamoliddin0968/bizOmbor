@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (
-    WorkerViewSet,ManagerViewSet
+    WorkerViewSet,ManagerViewSet,TestApiView
 )
 from rest_framework.routers import DefaultRouter
 
@@ -11,4 +11,5 @@ router.register('managers',ManagerViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
+    path('test/',TestApiView.as_view())
 ]

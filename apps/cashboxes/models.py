@@ -11,11 +11,4 @@ class CashBox(models.Model):
     is_active = models.BooleanField(default=False)
 
 
-# class Session(models.Model):
-#
-
-class CashboxPermission(models.Model):
-    user = models.ForeignKey('users.User',on_delete=models.CASCADE)
-    session = models.ForeignKey('cashboxes.session',on_delete=models.CASCADE)
-
 

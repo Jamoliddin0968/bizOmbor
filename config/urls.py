@@ -20,6 +20,7 @@ urlpatterns = [
     path("api/v1/cashbox/", include("apps.cashboxes.urls")),
     path("api/v1/store/",include('apps.stores.urls')),
 ]
+
 urlpatterns+=swagger_urlpatterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSuperUser, IsManager
-from .models import Manager, Worker
-from .serializers import ManagerSerializer, WorkerSerializer
+from .models import Manager, Worker,User
+from .serializers import ManagerSerializer, WorkerSerializer,TestSerializer
 from drf_spectacular.utils import extend_schema
-
+from rest_framework.generics import ListAPIView
 class WorkerViewSet(viewsets.ModelViewSet):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer
@@ -65,3 +65,8 @@ class ManagerViewSet(viewsets.ModelViewSet):
     @extend_schema(tags=['Manager'], description='Delete a manager')
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+
+class TestApiView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = TestSerializer

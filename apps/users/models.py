@@ -76,3 +76,11 @@ class Worker(User):
     def save(self, *args, **kwargs):
         self.is_manager=False
         return super().save(*args, **kwargs)
+
+
+class Seans(models.Model):
+    user = models.ForeignKey('users.User',on_delete=models.CASCADE)
+    user_agent = models.JSONField(null=True,blank=True)
+    device_id = models.CharField(max_length=31,default="")
+    is_active = models.BooleanField(default=True)
+    expire_date = models.IntegerField()
