@@ -52,7 +52,7 @@ class ManagerSerializer(ModelSerializer):
 
 
 
-class TestSerializer(ModelSerializer):
+class UserSerializer(ModelSerializer):
     class Meta:
         model=User
-        fields = "__all__"
+        exclude = ('is_manager','is_active','is_superuser','password')

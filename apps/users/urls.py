@@ -11,5 +11,5 @@ router.register('managers',ManagerViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path('test/',TestApiView.as_view())
+    path('',TestApiView.as_view())
 ]

@@ -2,9 +2,9 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSuperUser, IsManager
 from .models import Manager, Worker,User
-from .serializers import ManagerSerializer, WorkerSerializer,TestSerializer
+from .serializers import ManagerSerializer, WorkerSerializer,UserSerializer
 from drf_spectacular.utils import extend_schema
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveUpdateAPIView
 class WorkerViewSet(viewsets.ModelViewSet):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer
@@ -67,6 +67,22 @@ class ManagerViewSet(viewsets.ModelViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
-class TestApiView(ListAPIView):
+class TestApiView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = TestSerializer
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated,]
+    def get_object(self):
+        return self.request.user
+
+    @extend_schema(tags=['For all users'], description='Retrieve')
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+
+    @extend_schema(tags=['For all users'], description='Update a manager')
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(tags=['For all users'], description='Partial update a manager')
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
