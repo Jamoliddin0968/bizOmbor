@@ -6,10 +6,20 @@ from apps.products.models import Product
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import ProductFilter
 from apps.products.serializers import ProductSerializer
-
+from rest_framework.permissions import IsAuthenticated
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
+
     queryset = Product.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_manager:
+            return  Product.objects.filter(store__manager=user)
+        return Product.objects.filter(store=user.store)
+
+
+    permission_classes = [IsAuthenticated,]
+
 
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ProductFilter

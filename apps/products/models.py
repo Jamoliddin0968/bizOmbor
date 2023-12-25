@@ -18,6 +18,7 @@ def _generate_filename(instance, filename):
     return os.path.join('images/products/', uuid_filename)
 
 class Product(models.Model):
+    store = models.ForeignKey('stores.Store',on_delete=models.CASCADE)
     category = models.ForeignKey('categories.Category',on_delete=models.CASCADE)
     name = models.CharField(max_length=127)
     description = models.TextField()
