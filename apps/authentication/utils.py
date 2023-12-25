@@ -1,11 +1,12 @@
 import datetime
-from django.contrib.auth import authenticate
 from django.db.models import Q
 import jwt
 from apps.users.models import User
 from apps.users.models import Seans
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
+
+
 MANAGER_EXPIRE = 2*60
 SECRET_KEY = "skladum_dsfghj"
 WORKER_EXPIRE = 1

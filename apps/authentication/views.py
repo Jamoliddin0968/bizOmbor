@@ -28,7 +28,7 @@ class LoginBase(GenericAPIView):
         next_day = current_date + datetime.timedelta(days=self.expire_days)
         unix_timestamp = int(next_day.timestamp())
 
-        Seans.objects.filter(user=user).delete()
+        Seans.objects.filter(user=user).update(is_active=False)
         seans = Seans.objects.create(user=user, device_id=device_id,
                                      user_agent=user_agent_data, expire_date=unix_timestamp)
         payload = {'sub': seans.id}
@@ -42,7 +42,6 @@ class LoginBase(GenericAPIView):
         password = serializer.validated_data.get('password')
         device_id = serializer.validated_data.get('device_id')
         user = authenticate(username=username, password=password)
-
         if user and user.is_manager == self.is_manager:
             user_agent_data = request.META.get('HTTP_USER_AGENT', '')
 
