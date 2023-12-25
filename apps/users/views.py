@@ -5,6 +5,12 @@ from .models import Manager, Worker,User
 from .serializers import ManagerSerializer, WorkerSerializer,UserSerializer
 from drf_spectacular.utils import extend_schema
 from rest_framework.generics import RetrieveUpdateAPIView
+
+import jwt
+from rest_framework import authentication
+from rest_framework import exceptions
+from django.conf import settings
+from apps.users.models import User
 class WorkerViewSet(viewsets.ModelViewSet):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer
@@ -86,3 +92,31 @@ class TestApiView(RetrieveUpdateAPIView):
     @extend_schema(tags=['Users',], description='Partial update a manager')
     def partial_update(self, request, *args, **kwargs):
         return super().partial_update(request, *args, **kwargs)
+
+
+class CustomJWTAuthentication(authentication.BaseAuthentication):
+    def authenticate(self, request):
+        auth_header = request.headers.get('Authorization')
+
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return None
+
+        token = auth_header.split(' ')[1]
+
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY)
+            user_id = payload['user_id']  # Modify this according to your token payload
+            user = User.objects.get(pk=user_id)
+
+            # You can add additional checks/validation here if needed
+
+            return (user, token)
+
+        except jwt.ExpiredSignatureError:
+            raise exceptions.AuthenticationFailed('Token has expired')
+
+        except jwt.InvalidTokenError:
+            raise exceptions.AuthenticationFailed('Invalid token')
+
+        except User.DoesNotExist:
+            raise exceptions.AuthenticationFailed('User not found')

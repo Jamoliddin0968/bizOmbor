@@ -43,11 +43,15 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
 
-    'DEFAULT_FILTER_BACKENDS':(
-        'django_filters.rest_framework.DjangoFilterBackend',
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
     ),
-    'DEFAULT_AUTHENTICATIONS_CLASSES':(
-        'apps.authentication.views.JWTAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        "apps.authentication.utils.SafeJWTAuthentication",
+    ),
+'DEFAULT_FILTER_BACKENDS':(
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
 
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -58,7 +62,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Your project description',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
+
 }
 
 MIDDLEWARE = [
