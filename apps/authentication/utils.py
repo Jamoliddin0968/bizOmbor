@@ -41,11 +41,11 @@ class SafeJWTAuthentication(BaseAuthentication):
         return self.authenticate_credentials(token)
 
     def authenticate_credentials(self, token):
-        model = self.get_model()
-        payload = jwt.decode(token,SECRET_KEY,algorithms=[algorithm,])
-        seans_id = payload.get('sub')
-        msg = {'Error': "Token mismatch", 'status': "401"}
         try:
+            model = self.get_model()
+            payload = jwt.decode(token, SECRET_KEY, algorithms=[algorithm, ])
+            seans_id = payload.get('sub')
+            msg = {'Error': "Token mismatch", 'status': "401"}
             seans = Seans.objects.filter(Q(id = seans_id) & Q(is_active = True)).first()
             current_date = datetime.datetime.now()
             unix_timestamp = int(current_date.timestamp())
