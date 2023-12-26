@@ -10,6 +10,9 @@ class StoreViewSet(viewsets.ModelViewSet):
     serializer_class = StoreSerializer
     permission_classes = [IsAuthenticated, IsManager]
 
+    def get_queryset(self):
+        user = self.request.user
+        return Store.objects.filter(manager=user)
     @extend_schema(tags=['Store'])
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
@@ -38,6 +41,9 @@ class StoreUserViewSet(viewsets.ModelViewSet):
     queryset = StoreUser.objects.all()
     permission_classes = [IsManager,IsAuthenticated]
 
+    def get_queryset(self):
+        user = self.request.user
+        return StoreUser.objects.filter(store__manager=user)
     @extend_schema(tags=['Store'])
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
