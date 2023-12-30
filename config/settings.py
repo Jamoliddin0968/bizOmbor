@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.categories',
     'apps.stores',
-    'apps.cashboxes',
     'apps.sales',
     'apps.authentication',
 
@@ -43,7 +42,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
 
-
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),

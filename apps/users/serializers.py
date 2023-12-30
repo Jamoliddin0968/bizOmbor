@@ -22,7 +22,7 @@ class WorkerSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ("id", 'first_name', 'last_name', 'username',
-                  "phone", "is_active", "password",)
+                  "phone", "is_active", "password",'img')
 
 
 
@@ -48,11 +48,12 @@ class ManagerSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ("id", 'first_name', 'last_name', 'username',
-                  "phone", "is_active", "password")
+                  "phone", "is_active", "password",'img')
 
 
 
 class UserSerializer(ModelSerializer):
     class Meta:
         model=User
-        exclude = ('is_manager','is_active','is_superuser','password')
+        fields = ("id", 'first_name', 'last_name', 'username',
+                  "phone", "is_active",'img')
