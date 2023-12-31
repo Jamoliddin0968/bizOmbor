@@ -21,8 +21,8 @@ class WorkerSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", 'first_name', 'last_name', 'username',
-                  "phone", "is_active", "password","img")
+        fields = ("id", 'first_name', 'last_name', 'username',"img",
+                  "phone", "is_active", "password")
 
 
 
@@ -47,13 +47,13 @@ class ManagerSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "first_name", "last_name", "username",
-                  "phone", "is_active", "password","img")
+        fields = ("id", "first_name", "last_name", "username","img",
+                  "phone", "is_active", "password")
 
 
 
 class UserSerializer(ModelSerializer):
     class Meta:
         model=User
-        fields = ("id", 'first_name', 'last_name', 'username',
-                  "phone", "is_active","img")
+        fields = ("id", 'first_name', 'last_name', 'username',"img",
+                  "phone", "is_active")
