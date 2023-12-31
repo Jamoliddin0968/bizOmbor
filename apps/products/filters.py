@@ -1,7 +1,7 @@
 from django_filters import rest_framework as filters
 from .models import Product
 class ProductFilter(filters.FilterSet):
-    store_id = filters.NumberFilter()
+    store = filters.NumberFilter()
     barcode = filters.CharFilter(min_length=1)
     barcode_type = filters.CharFilter(min_length=1)
 
