@@ -1,32 +1,24 @@
 from rest_framework import viewsets
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
+from rest_framework.permissions import IsAuthenticated
+from apps.users.permissions import IsManager
 from apps.categories.serializers import CategorySerializer
 from apps.categories.models import Category
 
+@extend_schema_view(
+    list=extend_schema(tags=["Category"]),
+    retrieve=extend_schema(tags=["Category"]),
+    create=extend_schema(tags=["Category"]),
+    update=extend_schema(tags=["Category"]),
+    partial_update=extend_schema(tags=["Category"]),
+    destroy=extend_schema(tags=["Category"])
+)
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
-    queryset = Category.objects.all()
+    permission_classes = [IsAuthenticated,IsManager]
 
-    @extend_schema(tags=['Categories'], description='List categories', operation_id='list_categories')
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
-
-    @extend_schema(tags=['Categories'], description='Retrieve a category', operation_id='retrieve_category')
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
-
-    @extend_schema(tags=['Categories'], description='Create a category', operation_id='create_category')
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @extend_schema(tags=['Categories'], description='Update a category', operation_id='update_category')
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
-
-    @extend_schema(tags=['Categories'], description='Partial update a category', operation_id='partial_update_category')
-    def partial_update(self, request, *args, **kwargs):
-        return super().partial_update(request, *args, **kwargs)
-
-    @extend_schema(tags=['Categories'], description='Delete a category', operation_id='destroy_category')
-    def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
+    def get_queryset(self):
+        return Category.objects.filter(manager=self.request.user)
+    def perform_create(self, serializer):
+        manager = self.request.user
+        serializer.save(manager=manager)

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.stores',
     'apps.sales',
     'apps.authentication',
+    'apps.store_users',
 
 #     libs
     'rest_framework',

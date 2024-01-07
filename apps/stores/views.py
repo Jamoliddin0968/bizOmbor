@@ -1,12 +1,18 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from apps.users.permissions import IsManager
-from .filters import StoreUserFilter
-from .models import Store,StoreUser
-from .serializers import StoreSerializer, StoreUserCreateSerializer
+from .models import Store
+from .serializers import StoreSerializer
 
+@extend_schema_view(
+    list=extend_schema(tags=["Store"]),
+    retrieve=extend_schema(tags=["Store"]),
+    create=extend_schema(tags=["Store"]),
+    update=extend_schema(tags=["Store"]),
+    partial_update=extend_schema(tags=["Store"]),
+    destroy=extend_schema(tags=["Store"])
+)
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
@@ -15,55 +21,7 @@ class StoreViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Store.objects.filter(manager=user)
-    @extend_schema(tags=['Store'])
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store'])
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store'])
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store'])
-    def partial_update(self, request, *args, **kwargs):
-        return super().partial_update(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store'])
-    def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         serializer.save(manager=self.request.user)
 
-class StoreUserViewSet(viewsets.ModelViewSet):
-    serializer_class = StoreUserCreateSerializer
-    queryset = StoreUser.objects.all()
-    permission_classes = [IsAuthenticated,IsManager]
-    http_method_names = ["get","post","delete"]
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = StoreUserFilter
-    def get_queryset(self):
-        user = self.request.user
-        return StoreUser.objects.filter(store__manager=user)
-    @extend_schema(tags=['Store-user'])
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store-user'])
-    def list(self, request, *args, **kwargs):
-        return super().list(self, request, *args, **kwargs)
-
-    def perform_create(self, serializer):
-        serializer.save()
-
-
-    @extend_schema(tags=['Store-user'],)
-    def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
-
-    @extend_schema(tags=['Store-user'])
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)

@@ -1,9 +1,10 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from .models import Sale
 from .serializers import SaleCreateSerializer, SaleSerializer
+
 
 
 class SaleViewSet(viewsets.ModelViewSet):

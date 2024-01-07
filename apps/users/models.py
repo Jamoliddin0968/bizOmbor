@@ -48,37 +48,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.username
 
 
-class ManagerMangers(CustomUserManager):
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_manager=True)
-        return queryset
-
-class Manager(User):
-    class Meta:
-        proxy = True
-
-    objects = ManagerMangers()
-    def save(self, *args, **kwargs):
-        self.is_manager=True
-        return super().save(*args, **kwargs)
-
-class WorkerManager(CustomUserManager):
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_manager=False)
-        return queryset
-class Worker(User):
-    class Meta:
-        proxy = True
-
-    objects = WorkerManager()
-
-    def save(self, *args, **kwargs):
-        self.is_manager=False
-        return super().save(*args, **kwargs)
-
-
 class Seans(models.Model):
     user = models.ForeignKey('users.User',on_delete=models.CASCADE)
     user_agent = models.JSONField(null=True,blank=True)
