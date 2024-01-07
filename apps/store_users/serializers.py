@@ -1,6 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+# from rest_framework.fields import
+from rest_framework.serializers import ModelSerializer,CharField
 from .models import StoreUser
 from apps.users.serializers import UserSerializer
+from apps.stores.serializers import StoreSerializer
+from ..users.models import User
 
 
 class StoreUserCreateSerializer(ModelSerializer):
@@ -13,5 +16,24 @@ class StoreUserCreateSerializer(ModelSerializer):
         user:UserSerializer = validated_data.get('user')
         user = UserSerializer(data=user)
         user.is_valid(raise_exception=True)
-        print(validated_data)
-        store_user=StoreUser.objects.create(user_id=user.id,store_id=validated_data.get('user'))
+        user=user.save()
+        store_user=StoreUser.objects.create(user=user,store=validated_data.get('store'))
+
+        return store_user
+
+
+class PasswordChangeSerializer(ModelSerializer):
+    password = CharField(write_only=True, required=True,
+                         style={'input_type': 'password'})
+
+    def update(self, instance, validated_data):
+        if 'password' in validated_data:
+            password = validated_data.pop('password')
+            instance.set_password(password)
+            instance.save()
+        return super().update(instance, validated_data)
+
+    class Meta:
+        model = User
+        fields = ("password",)
+

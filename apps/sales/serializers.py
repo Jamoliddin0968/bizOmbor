@@ -4,6 +4,9 @@ from rest_framework.exceptions import ValidationError
 from .models import Sale,SaleItem
 from django.db import transaction
 
+from ..store_users.models import StoreUser
+
+
 class SaleItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SaleItem

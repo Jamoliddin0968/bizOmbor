@@ -1,7 +1,11 @@
-from django.urls import path
-from .views import StoreUserCreateAPIView
+from django.urls import path, include
+from .views import StoreUserViewSet,PasswordChangeView
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('',StoreUserViewSet,basename='Store user')
 
 urlpatterns = [
-    path('', StoreUserCreateAPIView.as_view(), name='storeuser-create'),
-    # path('storeusers/delete/<int:pk>/', StoreUserDeleteAPIView.as_view(), name='storeuser-delete'),
+    path('',include(router.urls)),
+    path('<int:pk>/',PasswordChangeView.as_view())
 ]

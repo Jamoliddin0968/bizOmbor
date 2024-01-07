@@ -54,3 +54,5 @@ class Seans(models.Model):
     device_id = models.CharField(max_length=31,default="")
     is_active = models.BooleanField(default=True)
     expire_date = models.IntegerField()
+
+

@@ -14,13 +14,13 @@ from apps.users.models import User
 
 
 @extend_schema_view(
-    retrieve=extend_schema(tags=["Category"]),
-    update=extend_schema(tags=["Category"]),
-    partial_update=extend_schema(tags=["Category"]),
+    retrieve=extend_schema(tags=["User"]),
+    update=extend_schema(tags=["User"]),
+    partial_update=extend_schema(tags=["User"]),
 )
 class UserViewSet(RetrieveUpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = User
+    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated,]
 
     def get_object(self):
