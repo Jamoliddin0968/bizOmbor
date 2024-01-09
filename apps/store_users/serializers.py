@@ -13,7 +13,7 @@ class StoreUserCreateSerializer(ModelSerializer):
                          style={'input_type': 'password'})
     store = IntegerField(write_only=True)
 
-    def validate_store_id(self, value):
+    def validate_store(self, value):
         try:
             store = Store.objects.get(id=value)
             current_user = self.context['request'].user
