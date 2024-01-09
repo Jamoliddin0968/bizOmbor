@@ -12,7 +12,7 @@ class StoreUserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated,IsManager]
 
     def get_queryset(self):
-        return StoreUser.objects.all(store=self.request.user)
+        return StoreUser.objects.filter(store__manager=self.request.user).all()
 
     http_method_names = ['get','post','delete']
 
