@@ -44,18 +44,18 @@ class StoreUserCreateSerializer(ModelSerializer):
         fields = ("id", 'first_name', 'last_name', 'username', "img",
                   "phone", "is_active", "password")
 
-    class Meta:
-        fields = "__all__"
-        model=StoreUser
-
-    def create(self, validated_data):
-        user:UserSerializer = validated_data.get('user')
-        user = UserSerializer(data=user)
-        user.is_valid(raise_exception=True)
-        user=user.save()
-        store_user=StoreUser.objects.create(user=user,store=validated_data.get('store'))
-
-        return store_user
+    # class Meta:
+    #     fields = "__all__"
+    #     model=StoreUser
+    #
+    # def create(self, validated_data):
+    #     user:UserSerializer = validated_data.get('user')
+    #     user = UserSerializer(data=user)
+    #     user.is_valid(raise_exception=True)
+    #     user=user.save()
+    #     store_user=StoreUser.objects.create(user=user,store=validated_data.get('store'))
+    #
+    #     return store_user
 
 
 class PasswordChangeSerializer(ModelSerializer):
