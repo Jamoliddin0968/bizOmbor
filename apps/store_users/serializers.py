@@ -14,7 +14,6 @@ class StoreUserCreateSerializer(ModelSerializer):
     store = IntegerField()
 
     def validate_store_id(self, value):
-        # You can perform validation for the store field here
         try:
             store = Store.objects.get(id=value)
             current_user = self.context['request'].user
@@ -32,12 +31,6 @@ class StoreUserCreateSerializer(ModelSerializer):
         store_user=StoreUser.objects.create(user=user,store=store)
         return user
 
-    def update(self, instance, validated_data):
-        if 'password' in validated_data:
-            password = validated_data.pop('password')
-            instance.set_password(password)
-            instance.save()
-        return super().update(instance, validated_data)
 
     class Meta:
         model = User
@@ -57,6 +50,11 @@ class StoreUserCreateSerializer(ModelSerializer):
     #
     #     return store_user
 
+class StoreUserSerializer(ModelSerializer):
+    user=UserSerializer()
+    class Meta:
+        fields = '__all__'
+        model=StoreUser
 
 class PasswordChangeSerializer(ModelSerializer):
     password = CharField(write_only=True, required=True,
