@@ -32,3 +32,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
+from .models import  Seans
+
+admin.site.register(Seans)
+# Register your models here.
