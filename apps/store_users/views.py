@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.users.permissions import IsManager
 from rest_framework import viewsets, status
 from apps.users.models import  User
-
+from rest_framework.generics import CreateAPIView
 from rest_framework.generics import UpdateAPIView
 @extend_schema_view(
     list=extend_schema(tags=["Store-User"]),
@@ -25,19 +25,17 @@ class StoreUserViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return StoreUser.objects.filter(store__manager=self.request.user).all()
 
-    http_method_names = ['get','post','delete']
+    http_method_names = ['get','delete']
 
-    @extend_schema(
-        request=StoreUserCreateSerializer,
-        responses={204: None,201:StoreUserCreateSerializer}
-    )
-    def create(self, request, *args, **kwargs):
-        serializer = StoreUserCreateSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        # serializer = self.serializer_class(da)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+@extend_schema_view(
+    list=extend_schema(tags=["Store-User"]),
+    # retrieve=extend_schema(tags=["Store-User"]),
+    create=extend_schema(tags=["Store-User"])
+)
+class StoreUserCreateApiView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = StoreUserCreateSerializer
+    permission_classes = [IsAuthenticated, IsManager]
 
 class PasswordChangeView(UpdateAPIView):
     queryset = User.objects.all()

@@ -11,7 +11,7 @@ from ..stores.models import Store
 class StoreUserCreateSerializer(ModelSerializer):
     password = CharField(write_only=True, required=True,
                          style={'input_type': 'password'})
-    store = IntegerField()
+    store = IntegerField(write_only=True)
 
     def validate_store_id(self, value):
         try:
@@ -28,14 +28,14 @@ class StoreUserCreateSerializer(ModelSerializer):
         pswd = validated_data.get("password")
         user.set_password(pswd)
         user.save()
-        store_user=StoreUser.objects.create(user=user,store=store)
+        store_user=StoreUser.objects.create(user=user,store_id=store)
         return user
 
 
     class Meta:
         model = User
         fields = ("id", 'first_name', 'last_name', 'username', "img",
-                  "phone", "is_active", "password",'store')
+                  "phone", "password",'store')
 
     # class Meta:
     #     fields = "__all__"
