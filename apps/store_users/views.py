@@ -1,4 +1,4 @@
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.response import Response
 
 from .models import StoreUser
@@ -9,7 +9,14 @@ from rest_framework import viewsets, status
 from apps.users.models import  User
 
 from rest_framework.generics import UpdateAPIView
-
+@extend_schema_view(
+    list=extend_schema(tags=["Store-User"]),
+    retrieve=extend_schema(tags=["Store-User"]),
+    create=extend_schema(tags=["Store-User"]),
+    update=extend_schema(tags=["Store-User"]),
+    partial_update=extend_schema(tags=["Store-User"]),
+    destroy=extend_schema(tags=["Store-User"])
+)
 class StoreUserViewSet(viewsets.ModelViewSet):
     queryset = StoreUser.objects.all()
     serializer_class = StoreUserSerializer
