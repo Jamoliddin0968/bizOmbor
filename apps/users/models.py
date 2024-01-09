@@ -51,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Seans(models.Model):
     user = models.ForeignKey('users.User',on_delete=models.CASCADE)
     user_agent = models.JSONField(null=True,blank=True)
-    device_id = models.CharField(max_length=31,default="")
+    device_id = models.CharField(max_length=127,default="")
     is_active = models.BooleanField(default=True)
     expire_date = models.IntegerField()
 
