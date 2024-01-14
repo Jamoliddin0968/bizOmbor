@@ -19,7 +19,7 @@ urlpatterns = [
     path("api/v1/users/", include("apps.users.urls")),
     path("api/v1/store/",include('apps.stores.urls')),
     path("api/v1/store-user/",include('apps.store_users.urls')),
-    path("api/v1/recovery",include('apps.recovery.urls'))
+    path("api/v1/recovery/",include('apps.recovery.urls'))
 ]
 
 urlpatterns+=swagger_urlpatterns
