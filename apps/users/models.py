@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class UserTarif(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     tarif = models.ForeignKey('tariff.tarif',on_delete=models.SET_NULL,null=True,blank=True)
-
+    expire = models.DateField(auto_now_add=True)
     def __str__(self):
         return f"{self.user.username} {self.tarif}"
 
