@@ -1,9 +1,11 @@
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+
 from apps.users.permissions import IsManager
 from .models import Store
 from .serializers import StoreSerializer
+
 
 @extend_schema_view(
     list=extend_schema(tags=["Store"]),
@@ -24,4 +26,3 @@ class StoreViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(manager=self.request.user)
-

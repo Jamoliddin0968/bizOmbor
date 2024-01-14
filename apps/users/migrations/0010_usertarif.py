@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('tariff', '0001_initial'),
         ('users', '0009_alter_seans_device_id'),
@@ -17,8 +16,10 @@ class Migration(migrations.Migration):
             name='UserTarif',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tarif', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='tariff.tarif')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('tarif', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                            to='tariff.tarif')),
+                (
+                'user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

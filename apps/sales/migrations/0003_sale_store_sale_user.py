@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('sales', '0002_alter_sale_cash_alter_sale_discount_and_more'),
         ('stores', '0004_storeuser_store_alter_storeuser_user'),
@@ -23,7 +22,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sale',
             name='user',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE,
+                                    to=settings.AUTH_USER_MODEL),
             preserve_default=False,
         ),
     ]

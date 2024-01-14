@@ -1,9 +1,11 @@
-from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema, extend_schema_view
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from apps.users.permissions import IsManager
-from apps.categories.serializers import CategorySerializer
+
 from apps.categories.models import Category
+from apps.categories.serializers import CategorySerializer
+from apps.users.permissions import IsManager
+
 
 @extend_schema_view(
     list=extend_schema(tags=["Category"]),
@@ -15,10 +17,11 @@ from apps.categories.models import Category
 )
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated,IsManager]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def get_queryset(self):
         return Category.objects.filter(manager=self.request.user)
+
     def perform_create(self, serializer):
         manager = self.request.user
         serializer.save(manager=manager)

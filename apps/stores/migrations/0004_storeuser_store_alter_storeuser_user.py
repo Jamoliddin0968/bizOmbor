@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('stores', '0003_rename_user_store_manager_storeuser'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

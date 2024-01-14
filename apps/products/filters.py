@@ -1,5 +1,8 @@
 from django_filters import rest_framework as filters
+
 from .models import Product
+
+
 class ProductFilter(filters.FilterSet):
     store = filters.NumberFilter()
     barcode = filters.CharFilter(min_length=1)
@@ -7,4 +10,4 @@ class ProductFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields = ['barcode', 'barcode_type','store']
+        fields = ['barcode', 'barcode_type', 'store']

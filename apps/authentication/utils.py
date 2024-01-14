@@ -1,20 +1,23 @@
 import datetime
-from django.db.models import Q
+
 import jwt
-from apps.users.models import User
-from apps.users.models import Seans
-from rest_framework.exceptions import AuthenticationFailed
+from django.db.models import Q
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
+from rest_framework.exceptions import AuthenticationFailed
 
+from apps.users.models import Seans
+from apps.users.models import User
 
-MANAGER_EXPIRE = 2*60
+MANAGER_EXPIRE = 2 * 60
 SECRET_KEY = "skladum_dsfghj"
 WORKER_EXPIRE = 1
 
-algorithm="HS256"
+algorithm = "HS256"
+
 
 class SafeJWTAuthentication(BaseAuthentication):
     model = None
+
     def get_model(self):
         return User
 
@@ -47,7 +50,7 @@ class SafeJWTAuthentication(BaseAuthentication):
             payload = jwt.decode(token, SECRET_KEY, algorithms=[algorithm, ])
             seans_id = payload.get('sub')
             msg = {'Error': "Token mismatch", 'status': "401"}
-            seans = Seans.objects.filter(Q(id = seans_id) & Q(is_active = True)).first()
+            seans = Seans.objects.filter(Q(id=seans_id) & Q(is_active=True)).first()
             current_date = datetime.datetime.now()
             unix_timestamp = int(current_date.timestamp())
 
@@ -59,4 +62,3 @@ class SafeJWTAuthentication(BaseAuthentication):
 
     def authenticate_header(self, request):
         return 'BEARER'
-

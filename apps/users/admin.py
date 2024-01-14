@@ -1,8 +1,10 @@
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
-from django.contrib import admin
+
 from .forms import UserChangeForm, UserCreationForm
 from .models import User
+
 
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
@@ -11,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_manager',)
 
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'first_name', 'last_name','is_manager')}),
+        (None, {'fields': ('username', 'password', 'first_name', 'last_name', 'is_manager')}),
         # ('Permissions', {'fields': ('is_admin',)}),
     )
 
@@ -32,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
-from .models import  Seans
+from .models import Seans,UserTarif
 
-admin.site.register(Seans)
+admin.site.register((Seans,UserTarif))
 # Register your models here.

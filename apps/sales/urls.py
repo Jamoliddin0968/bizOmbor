@@ -1,8 +1,10 @@
-from django.urls import  path,include
-from .views import SaleViewSet
+from django.urls import path, include
 from rest_framework import routers
+
+from .views import SaleViewSet
+
 router = routers.DefaultRouter()
-router.register('',SaleViewSet)
+router.register('', SaleViewSet)
 urlpatterns = [
-    path('',include(router.urls)),
+    path('', include(router.urls)),
 ]

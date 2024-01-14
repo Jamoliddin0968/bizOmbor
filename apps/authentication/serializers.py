@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+
 # from rest_framework_simplejwt.serializers import
 
 class _PasswordField(serializers.CharField):
@@ -10,7 +12,8 @@ class _PasswordField(serializers.CharField):
 
         super().__init__(*args, **kwargs)
 
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
-    password=_PasswordField()
+    password = _PasswordField()
     device_id = serializers.CharField()

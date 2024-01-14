@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer, CharField
+
 from .models import User
 
 
@@ -22,6 +23,5 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", 'first_name', 'last_name', 'username',"img",
+        fields = ("id", 'first_name', 'last_name', 'username', "img",
                   "phone", "is_active", "password")
-

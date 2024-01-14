@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('stores', '0001_initial'),
         ('users', '0004_manager_worker'),
@@ -15,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='store',
             name='user',
-            field=models.ForeignKey(limit_choices_to={'is_manager': True}, on_delete=django.db.models.deletion.CASCADE, to='users.manager'),
+            field=models.ForeignKey(limit_choices_to={'is_manager': True}, on_delete=django.db.models.deletion.CASCADE,
+                                    to='users.manager'),
         ),
     ]

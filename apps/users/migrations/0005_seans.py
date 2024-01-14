@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0004_manager_worker'),
     ]
@@ -20,7 +19,8 @@ class Migration(migrations.Migration):
                 ('device_id', models.CharField(default='', max_length=31)),
                 ('is_active', models.BooleanField(default=True)),
                 ('expire_date', models.IntegerField()),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                'user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

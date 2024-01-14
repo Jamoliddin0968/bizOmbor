@@ -1,11 +1,10 @@
+from django.db import transaction
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from .models import Sale,SaleItem
-from django.db import transaction
-
-from apps.store_users.models import StoreUser
 from apps.recovery.serializers import RecoverySerializer
+from apps.store_users.models import StoreUser
+from .models import Sale, SaleItem
 from ..recovery.models import RecoveryItem, Recovery
 
 
@@ -14,10 +13,12 @@ class SaleItemSerializer(serializers.ModelSerializer):
         model = SaleItem
         fields = "__all__"
 
+
 class SaleSerializer(serializers.ModelSerializer):
-    items = SaleItemSerializer(many=True,source='sale_items')
+    items = SaleItemSerializer(many=True, source='sale_items')
+
     class Meta:
-        fields = ('id','date','discount','cash','without_cash','total_summa','items','store','user')
+        fields = ('id', 'date', 'discount', 'cash', 'without_cash', 'total_summa', 'items', 'store', 'user')
         model = Sale
 
 
@@ -40,23 +41,24 @@ class SaleCreateSerializer(serializers.Serializer):
             user = self.context['request'].user
             store_user = StoreUser.objects.filter(user=user).first()
             if not store_user:
-                raise ValidationError({"message":"You don't permission for store"})
+                raise ValidationError({"message": "You don't permission for store"})
             discount = validated_data.pop('discount')
             cash = validated_data.pop('cash')
-            without_cash=validated_data.pop('without_cash')
-            sale_object = Sale.objects.create(discount=discount,cash=cash,without_cash=without_cash,user=user,store=store)
+            without_cash = validated_data.pop('without_cash')
+            sale_object = Sale.objects.create(discount=discount, cash=cash, without_cash=without_cash, user=user,
+                                              store=store)
             items = validated_data.pop('items')
-            new_items=[]
+            new_items = []
             summ = 0
             for item in items:
-                temp = SaleItem(sale=sale_object,price = item["price"],product=item['product'],amount=item['amount'],total=item['total'])
+                temp = SaleItem(sale=sale_object, price=item["price"], product=item['product'], amount=item['amount'],
+                                total=item['total'])
                 new_items.append(temp)
-                summ+=temp.total
+                summ += temp.total
             SaleItem.objects.bulk_create(new_items)
             sale_object.total_summa = summ
 
             user = self.context['request'].user
-
 
             items = validated_data.pop('items')
             if items:
@@ -65,5 +67,3 @@ class SaleCreateSerializer(serializers.Serializer):
                     RecoveryItem.objects.create(**item, recovery=recovery)
 
         return sale_object
-
-

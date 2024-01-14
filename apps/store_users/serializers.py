@@ -1,10 +1,10 @@
 # from rest_framework.fields import
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer,CharField,IntegerField
-from .models import StoreUser
-from apps.users.serializers import UserSerializer
-from apps.stores.serializers import StoreSerializer
+from rest_framework.serializers import ModelSerializer, CharField, IntegerField
+
 from apps.users.models import User
+from apps.users.serializers import UserSerializer
+from .models import StoreUser
 from ..stores.models import Store
 
 
@@ -22,20 +22,20 @@ class StoreUserCreateSerializer(ModelSerializer):
         except Store.DoesNotExist:
             raise serializers.ValidationError("Invalid Store ID")
         return value
+
     def create(self, validated_data):
         store = validated_data.pop('store')
-        user=User.objects.create(**validated_data)
+        user = User.objects.create(**validated_data)
         pswd = validated_data.get("password")
         user.set_password(pswd)
         user.save()
-        store_user=StoreUser.objects.create(user=user,store_id=store)
+        store_user = StoreUser.objects.create(user=user, store_id=store)
         return user
-
 
     class Meta:
         model = User
         fields = ("id", 'first_name', 'last_name', 'username', "img",
-                  "phone", "password",'store')
+                  "phone", "password", 'store')
 
     # class Meta:
     #     fields = "__all__"
@@ -50,11 +50,14 @@ class StoreUserCreateSerializer(ModelSerializer):
     #
     #     return store_user
 
+
 class StoreUserSerializer(ModelSerializer):
-    user=UserSerializer()
+    user = UserSerializer()
+
     class Meta:
         fields = '__all__'
-        model=StoreUser
+        model = StoreUser
+
 
 class PasswordChangeSerializer(ModelSerializer):
     password = CharField(write_only=True, required=True,
@@ -70,4 +73,3 @@ class PasswordChangeSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ("password",)
-

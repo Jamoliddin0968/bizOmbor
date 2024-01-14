@@ -1,13 +1,9 @@
-from django.urls import path, include
+from django.urls import path
+
 from .views import (
     UserViewSet
 )
 
-
-
-
-
 urlpatterns = [
-    path("me/",UserViewSet.as_view()),
+    path("me/", UserViewSet.as_view()),
 ]
-

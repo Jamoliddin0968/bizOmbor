@@ -1,5 +1,7 @@
 from rest_framework.serializers import ModelSerializer
+
 from .models import Store
+
 
 class StoreSerializer(ModelSerializer):
     class Meta:
@@ -8,5 +10,3 @@ class StoreSerializer(ModelSerializer):
         extra_kwargs = {
             'manager': {'read_only': True}  # Assuming you don't want to allow image update via API
         }
-
-

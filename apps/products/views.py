@@ -1,14 +1,11 @@
-from rest_framework import viewsets
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema, extend_schema_view
-from apps.products.models import Product
 from django_filters.rest_framework import DjangoFilterBackend
-from .filters import ProductFilter
-from apps.products.serializers import ProductSerializer
+from drf_spectacular.utils import extend_schema, extend_schema_view
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from ..stores.models import Store
+from apps.products.models import Product
+from apps.products.serializers import ProductSerializer
+from .filters import ProductFilter
 
 
 @extend_schema_view(
@@ -29,5 +26,5 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if user.is_manager:
-            return  Product.objects.filter(store__manager=user).all()
+            return Product.objects.filter(store__manager=user).all()
         return Product.objects.filter(store=user.store).all()

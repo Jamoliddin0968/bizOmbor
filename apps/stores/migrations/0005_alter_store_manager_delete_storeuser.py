@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('stores', '0004_storeuser_store_alter_storeuser_user'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

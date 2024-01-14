@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('products', '0002_alter_product_image'),
         ('stores', '0004_storeuser_store_alter_storeuser_user'),

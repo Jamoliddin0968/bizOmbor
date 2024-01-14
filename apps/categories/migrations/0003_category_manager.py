@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('categories', '0002_alter_category_image'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
@@ -16,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='manager',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE,
+                                    to=settings.AUTH_USER_MODEL),
             preserve_default=False,
         ),
     ]

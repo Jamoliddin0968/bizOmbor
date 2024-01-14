@@ -1,6 +1,7 @@
-from django.urls import  path,include
+from django.urls import path
+
 from .views import RecoveryCreateApiView
 
 urlpatterns = [
-    path('',RecoveryCreateApiView.as_view()),
+    path('', RecoveryCreateApiView.as_view()),
 ]
