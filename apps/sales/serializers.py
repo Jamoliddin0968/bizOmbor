@@ -4,7 +4,7 @@ from rest_framework.exceptions import ValidationError
 from .models import Sale,SaleItem
 from django.db import transaction
 
-from ..store_users.models import StoreUser
+from apps.store_users.models import StoreUser
 
 
 class SaleItemSerializer(serializers.ModelSerializer):
@@ -25,9 +25,9 @@ class SaleItemCreateSerializer(serializers.ModelSerializer):
         fields = ('product', 'price', 'amount', 'total')
 
 
-
 class SaleCreateSerializer(serializers.Serializer):
     items = SaleItemCreateSerializer(many=True)
+    # recovery = VozvratSerializer()
     discount = serializers.IntegerField(min_value=0)
     cash = serializers.IntegerField(min_value=0)
     without_cash = serializers.IntegerField(min_value=0)

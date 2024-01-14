@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.sales',
     'apps.authentication',
     'apps.store_users',
+    'apps.recovery',
 
 #     libs
     'rest_framework',
@@ -62,8 +63,8 @@ REST_FRAMEWORK = {
 
 }
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
+    'TITLE': 'Skladum app',
+    'DESCRIPTION': '''Legendarniy "Simple Team" mahsuloti ''',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 

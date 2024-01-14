@@ -13,11 +13,12 @@ class Sale(models.Model):
     store = models.ForeignKey('stores.Store',on_delete=models.CASCADE)
     user = models.ForeignKey('users.User',on_delete=models.CASCADE)
 
-
-
 class SaleItem(models.Model):
     sale = models.ForeignKey('sales.sale',related_name='sale_items',on_delete=models.CASCADE)
     product = models.ForeignKey('products.Product',on_delete=models.CASCADE)
     price = models.IntegerField()
     amount = models.FloatField(default=0)
     total = models.IntegerField()
+
+
+
