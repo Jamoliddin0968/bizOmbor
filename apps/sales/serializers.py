@@ -5,6 +5,8 @@ from .models import Sale,SaleItem
 from django.db import transaction
 
 from apps.store_users.models import StoreUser
+from apps.recovery.serializers import RecoverySerializer
+from ..recovery.models import RecoveryItem, Recovery
 
 
 class SaleItemSerializer(serializers.ModelSerializer):
@@ -27,7 +29,7 @@ class SaleItemCreateSerializer(serializers.ModelSerializer):
 
 class SaleCreateSerializer(serializers.Serializer):
     items = SaleItemCreateSerializer(many=True)
-    # recovery = VozvratSerializer()
+    recovery = RecoverySerializer()
     discount = serializers.IntegerField(min_value=0)
     cash = serializers.IntegerField(min_value=0)
     without_cash = serializers.IntegerField(min_value=0)
@@ -52,6 +54,16 @@ class SaleCreateSerializer(serializers.Serializer):
                 summ+=temp.total
             SaleItem.objects.bulk_create(new_items)
             sale_object.total_summa = summ
+
+            user = self.context['request'].user
+
+
+            items = validated_data.pop('items')
+            if items:
+                recovery = Recovery.objects.create(sale=sale_object, user=user)
+                for item in items:
+                    RecoveryItem.objects.create(**item, recovery=recovery)
+
         return sale_object
 
 

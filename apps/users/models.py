@@ -47,6 +47,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
+class UserTarif(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    tarif = models.ForeignKey('tariff.tarif',on_delete=models.SET_NULL,null=True,blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} {self.tarif}"
 
 class Seans(models.Model):
     user = models.ForeignKey('users.User',on_delete=models.CASCADE)

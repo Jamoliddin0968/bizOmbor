@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.authentication',
     'apps.store_users',
     'apps.recovery',
+    'apps.tariff',
 
 #     libs
     'rest_framework',

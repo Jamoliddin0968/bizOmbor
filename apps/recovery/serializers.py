@@ -22,7 +22,7 @@ class RecoverySerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        vozvrat = None
+        recovery = None
         with transaction.atomic():
             user = self.context['request'].user
             sale = validated_data.get('sale')
@@ -31,9 +31,9 @@ class RecoverySerializer(serializers.ModelSerializer):
                 raise ValidationError({"message":"You don't permission for store"})
             items = validated_data.pop('items')
             if items:
-                vozvrat = Recovery.objects.create(sale=sale, user=user)
+                recovery = Recovery.objects.create(sale=sale, user=user)
                 for item in items:
-                    RecoveryItem.objects.create(**item,sale=sale)
-        return vozvrat
+                    RecoveryItem.objects.create(**item,recovery=recovery)
+        return recovery
 
 

@@ -12,3 +12,6 @@ class Category(models.Model):
     manager = models.ForeignKey('users.User',on_delete=models.CASCADE)
     name = models.CharField(max_length=63)
     image = models.ImageField(upload_to=_generate_filename,null=True,blank=True)
+
+    def __str__(self):
+        return self.name

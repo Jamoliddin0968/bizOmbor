@@ -29,3 +29,5 @@ class Product(models.Model):
     barcode_type = models.CharField(max_length=31)
 
 
+    def __str__(self):
+        return self.name
