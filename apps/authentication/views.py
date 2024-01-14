@@ -4,11 +4,15 @@ from django.db.models import Q
 import jwt
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from apps.users.models import User
+from apps.users.models import User, UserTarif
 from .serializers import LoginSerializer
 from apps.users.models import Seans
-from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.authentication import get_authorization_header, BaseAuthentication
+from rest_framework.exceptions import AuthenticationFailed, ValidationError
+
+from ..store_users.models import StoreUser
+
+# from rest_framework.authentication import get_authorization_header, BaseAuthentication
+
 MANAGER_EXPIRE = 2*60
 SECRET_KEY = "skladum_dsfghj"
 WORKER_EXPIRE = 1
@@ -42,6 +46,24 @@ class LoginBase(GenericAPIView):
         password = serializer.validated_data.get('password')
         device_id = serializer.validated_data.get('device_id')
         user = authenticate(username=username, password=password)
+
+        if user and user.is_manager == False:
+            current_date = datetime.now().date()
+            store = StoreUser.objects.filter(user=user).first()
+            if not store:
+                manager = store.manager
+                tarif = UserTarif.objects.filter(user=manager)
+                if not tarif:
+                    if current_date > tarif.expire:
+                        pass
+                    else:
+                        raise ValidationError(detail="Please buy tarif")
+                else:
+                    raise ValidationError(detail="Your store dont have tarif")
+            else:
+                raise ValidationError(detail="You don't have story")
+
+
         if user and user.is_manager == self.is_manager:
             user_agent_data = request.META.get('HTTP_USER_AGENT', '')
 
