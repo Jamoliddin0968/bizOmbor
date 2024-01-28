@@ -16,8 +16,6 @@ SECRET_KEY = 'django-insecure-s_*n4ai9fg3+w0&kwx-_&gu$-)-=w(5)qf*o@73yh-j29hzf7*
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -100,13 +98,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
@@ -117,10 +110,6 @@ DATABASES = {
         'PORT': config("DB_PORT"),
     }
 }
-
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -138,8 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -160,10 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-
 # Define the URL prefix to access uploaded files on the web.
 MEDIA_URL = '/media/'
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'

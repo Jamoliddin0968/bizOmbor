@@ -9,7 +9,7 @@ from apps.store_users.models import StoreUser
 class RecoveryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecoveryItem
-        exclude = ('sale',)
+        exclude = ('id',)
 
 
 class RecoverySerializer(serializers.ModelSerializer):
