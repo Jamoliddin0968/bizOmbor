@@ -6,17 +6,15 @@ from pathlib import Path
 
 from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-s_*n4ai9fg3+w0&kwx-_&gu$-)-=w(5)qf*o@73yh-j29hzf7*'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-# Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'drf_spectacular',
-#     my apps
+    #     my apps
     'apps.products',
     'apps.users',
     'apps.categories',
@@ -37,8 +35,9 @@ INSTALLED_APPS = [
     'apps.store_users',
     'apps.recovery',
     'apps.tariff',
-
-#     libs
+    'apps.sync',
+    'apps.smenas',
+    #     libs
     'rest_framework',
     'django_filters',
 ]
@@ -49,12 +48,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES':(
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         "apps.authentication.utils.SafeJWTAuthentication",
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication'
     ),
-'DEFAULT_FILTER_BACKENDS':(
+    'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 
@@ -98,8 +97,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
@@ -110,8 +107,6 @@ DATABASES = {
         'PORT': config("DB_PORT"),
     }
 }
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -127,8 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -138,16 +131,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-# Define the URL prefix to access uploaded files on the web.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'

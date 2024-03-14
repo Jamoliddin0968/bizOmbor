@@ -1,14 +1,13 @@
 from django.db import models
 
-from apps.tools.utils import get_current_date_as_integer
-
 
 # Create your models here.
 class Recovery(models.Model):
     sale = models.OneToOneField('sales.sale', related_name='sale_recovery', on_delete=models.CASCADE)
-    date = models.IntegerField(default=get_current_date_as_integer)
+    date = models.DateTimeField(auto_now_add=True)
     total_summa = models.IntegerField(default=0)
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    smena = models.ForeignKey('smenas.smena', on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class RecoveryItem(models.Model):

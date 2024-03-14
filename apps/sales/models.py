@@ -1,10 +1,10 @@
 from django.db import models
 
-from apps.tools.utils import get_current_date_as_integer
-
-
+def get_current_date_as_integer():
+    pass
 class Sale(models.Model):
-    date = models.IntegerField(default=get_current_date_as_integer)
+    smena = models.ForeignKey('smenas.smena', on_delete=models.SET_NULL, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
     discount = models.IntegerField(default=0)
     cash = models.IntegerField(default=0)
     without_cash = models.IntegerField(default=0)

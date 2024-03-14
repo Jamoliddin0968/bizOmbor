@@ -34,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
-from .models import Seans,UserTarif
+from .models import Seans, UserTarif
 
-admin.site.register((Seans,UserTarif))
+admin.site.register((Seans, UserTarif))
 # Register your models here.
