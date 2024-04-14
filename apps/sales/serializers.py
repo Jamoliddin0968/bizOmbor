@@ -45,6 +45,7 @@ class SaleCreateSerializer(serializers.Serializer):
             discount = validated_data.pop('discount')
             cash = validated_data.pop('cash')
             without_cash = validated_data.pop('without_cash')
+            store = store_user.store
             sale_object = Sale.objects.create(discount=discount, cash=cash, without_cash=without_cash, user=user,
                                               store=store)
             items = validated_data.pop('items')

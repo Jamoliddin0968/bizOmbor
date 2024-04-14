@@ -2,6 +2,7 @@ from django.db import models
 
 def get_current_date_as_integer():
     pass
+
 class Sale(models.Model):
     smena = models.ForeignKey('smenas.smena', on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
