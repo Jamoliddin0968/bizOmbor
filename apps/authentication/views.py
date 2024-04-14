@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime,timedelta
 
 import jwt
 from django.contrib.auth import authenticate
@@ -25,8 +25,8 @@ class LoginBase(GenericAPIView):
     expire_days = 0
 
     def generate_token(self, user, device_id, user_agent_data):
-        current_date = datetime.datetime.now()
-        next_day = current_date + datetime.timedelta(days=self.expire_days)
+        current_date = datetime.now()
+        next_day = current_date + timedelta(days=self.expire_days)
         unix_timestamp = int(next_day.timestamp())
 
         Seans.objects.filter(user=user).update(is_active=False)
@@ -47,7 +47,7 @@ class LoginBase(GenericAPIView):
         if user and user.is_manager == False:
             current_date = datetime.now().date()
             store = StoreUser.objects.filter(user=user).first()
-            if not store:
+            if  store:
                 manager = store.manager
                 tarif = UserTarif.objects.filter(user=manager)
                 if not tarif:
