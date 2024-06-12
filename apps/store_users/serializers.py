@@ -23,7 +23,7 @@ class StoreUserCreateSerializer(ModelSerializer):
         return value
 
     class Meta:
-        model = User
+        model = StoreUser
         fields = ("id", 'first_name', 'last_name', 'username', "img",
                   "phone", "password", 'store')
 
