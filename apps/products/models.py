@@ -10,7 +10,14 @@ MEASURE_TYPES = (
     ('gr', 'gr'),
     ('metr', 'metr'),
 )
-
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.db import models
+from django.contrib.contenttypes.models import ContentType
+class Image(models.Model):
+    image = models.ImageField(upload_to="images")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey("content_type", "object_id")
 
 def _generate_filename(instance, filename):
     file_extension = os.path.splitext(filename)[1]

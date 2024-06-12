@@ -1,6 +1,6 @@
 from django.db import models
 
+from apps.users.models import User
 
-class StoreUser(models.Model):
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE, unique=True)
+class StoreUser(User):
     store = models.ForeignKey('stores.Store', on_delete=models.CASCADE)

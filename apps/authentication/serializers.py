@@ -12,8 +12,3 @@ class _PasswordField(serializers.CharField):
 
         super().__init__(*args, **kwargs)
 
-
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = _PasswordField()
-    device_id = serializers.CharField()

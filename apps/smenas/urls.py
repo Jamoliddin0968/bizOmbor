@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views import SmenaViewSet
 
 router = routers.DefaultRouter()
-router.register('', SmenaViewSet)
+router.register('smenas', SmenaViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]

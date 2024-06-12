@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views import SaleViewSet
 
 router = routers.DefaultRouter()
-router.register('', SaleViewSet)
+router.register('sales', SaleViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]

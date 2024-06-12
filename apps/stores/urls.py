@@ -6,7 +6,7 @@ from .views import (
 )
 
 router = DefaultRouter()
-router.register("", StoreViewSet)
+router.register("store", StoreViewSet)
 # router.register("store-user",StoreUserViewSet)
 
 

@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from .views import StoreUserViewSet, PasswordChangeView, StoreUserCreateApiView
 
 router = DefaultRouter()
-router.register('', StoreUserViewSet, basename='Store user')
+router.register('store-user', StoreUserViewSet, basename='Store user')
 
 urlpatterns = [
     path('new/', StoreUserCreateApiView.as_view()),
