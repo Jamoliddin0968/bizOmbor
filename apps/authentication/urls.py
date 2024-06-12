@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import LoginManager, LoginWorker
+# from .views import LoginManager, LoginWorker
 
 urlpatterns = [
     # path('manager/', LoginManager.as_view(), name='login+for_manager'),
