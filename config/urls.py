@@ -19,16 +19,16 @@ token_urlpatterns = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',include('apps.authentication.urls')),
+    # path('login/',include('apps.authentication.urls')),
     path('api/v1/',include('apps.products.urls')),
     path('api/v1/',include('apps.categories.urls')),
-    path('api/v1/',include('apps.sales.urls')),
+    # path('api/v1/',include('apps.sales.urls')),
     path("api/v1/", include("apps.users.urls")),
-    path("api/v1/",include('apps.stores.urls')),
-    path("api/v1/",include('apps.store_users.urls')),
-    path("api/v1/",include('apps.recovery.urls')),
-    path("api/v1/",include('apps.sync.urls')),
-    path("api/v1/",include('apps.smenas.urls'))
+    # path("api/v1/",include('apps.stores.urls')),
+    # path("api/v1/",include('apps.store_users.urls')),
+    # path("api/v1/",include('apps.recovery.urls')),
+    # path("api/v1/",include('apps.sync.urls')),
+    # path("api/v1/",include('apps.smenas.urls'))
 ]
 
 urlpatterns+=swagger_urlpatterns

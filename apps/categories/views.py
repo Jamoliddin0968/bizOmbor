@@ -21,7 +21,3 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Category.objects.filter(manager=self.request.user)
-
-    def perform_create(self, serializer):
-        manager = self.request.user
-        serializer.save(manager=manager)
