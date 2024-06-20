@@ -23,8 +23,3 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_class = ProductFilter
     queryset = Product.objects.all()
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_manager:
-            return Product.objects.filter(store__manager=user).all()
-        return Product.objects.filter(store=user.store).all()
