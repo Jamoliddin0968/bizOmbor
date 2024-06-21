@@ -1,5 +1,6 @@
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
 swagger_urlpatterns = [
     # YOUR PATTERNS
     path('schema/', SpectacularAPIView.as_view(), name='schema'),

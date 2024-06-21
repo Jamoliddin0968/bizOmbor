@@ -67,6 +67,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': '''Legendarniy "Simple Team" mahsuloti ''',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True
 
 }
 
@@ -109,10 +110,6 @@ DATABASES = {
         'HOST': config("DB_HOST"),
         'PORT': config("DB_PORT"),
     }, 
- 
-    
-
-
 }
 
 AUTH_PASSWORD_VALIDATORS = [

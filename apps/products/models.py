@@ -10,7 +10,7 @@ MEASURE_TYPES = (
     ('gr', 'gr'),
     ('metr', 'metr'),
 )
-fake = Faker()
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
@@ -41,18 +41,3 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-def gen_():
-    for i in range(20000):
-        print(i)
-        id = uuid.uuid4()
-        if not Product.objects.filter(id=id).exists():
-            Product.objects.create( 
-                id=id,
-        category_id = 1,
-        title= fake.word(),
-        description= fake.text(),
-        measure= "kg",
-        price= fake.random_int(min=10, max=1000),
-        barcode= fake.isbn13(),
-        barcode_type= "EAN-13"
-        )
