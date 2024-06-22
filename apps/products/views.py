@@ -1,10 +1,13 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from apps.products.models import Product
-from apps.products.serializers import ProductSerializer
+from apps.products.serializers import (ProductListCreateSerializer,
+                                       ProductSerializer)
+
 from .filters import ProductFilter
 
 
@@ -23,3 +26,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_class = ProductFilter
     queryset = Product.objects.all()
 
+
+class ProductListCreateAPIView(CreateAPIView):
+    serializer_class = ProductListCreateSerializer
+    queryset = Product.objects.all()

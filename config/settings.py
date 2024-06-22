@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'apps.tariff',
     'apps.sync',
     'apps.smenas',
+    'apps.versions',
     #     libs
     'rest_framework',
     'django_filters',

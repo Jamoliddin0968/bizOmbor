@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/v1/',include('apps.categories.urls')),
     # path('api/v1/',include('apps.sales.urls')),
     path("api/v1/", include("apps.users.urls")),
+    path("api/v1/", include("apps.versions.urls")),
     # path("api/v1/",include('apps.stores.urls')),
     # path("api/v1/",include('apps.store_users.urls')),
     # path("api/v1/",include('apps.recovery.urls')),
